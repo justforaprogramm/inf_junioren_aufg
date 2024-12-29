@@ -183,4 +183,4 @@ class Data:
         pprint(self.filecontent)
 
 if __name__ == '__main__':
-    print(Main(True))
+    print(Main())
