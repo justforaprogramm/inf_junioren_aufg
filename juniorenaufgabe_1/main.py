@@ -29,7 +29,7 @@ class Main():
         # calculation
         for x in range(square_num, int(square_num*1.1)+1):
             for num in range(1, x+1):
-                num_dict.setdefault(x, []).append([num, ((num**2)/x) * area]) if x % num == 0 else ...
+                num_dict.setdefault(x, []).append([num, ((num**2)/x) * area]) if (x % num) == 0 else ...
 
         for squares in num_dict:
             search.append([item[1] for item in num_dict[squares]])
