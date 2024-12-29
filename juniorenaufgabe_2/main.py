@@ -108,7 +108,7 @@ class Data:
         """look if file exist in path, if not, create it
            and make some file calls to reduce time later
         """
-        self.filename = './juniorenaufgabe_2/data.self.Txt'
+        self.filename = './juniorenaufgabe_2/data.txt'
 
         try:
             open(self.filename, 'x').close()
