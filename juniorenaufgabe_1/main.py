@@ -2,6 +2,11 @@ from pprint import pprint
 
 class Main():
     def __init__(self, debugmode = False):
+        """call functions
+
+        Args:
+            debugmode (bool, optional): make a print more if result want to be checked. Defaults to False.
+        """
         self.input = self.input()
         self.calc()
         self.debug() if debugmode else ...
@@ -13,7 +18,9 @@ class Main():
         return [int(numberofareas), int(bottom), int(side)]
 
     def calc(self):
-        # define
+        """calculates area squerest
+        """
+        # difines for calculation
         area = self.input[1] / self.input[2]
         square_num = self.input[0]
         num_dict = {}
@@ -39,8 +46,16 @@ class Main():
     
 
     def __str__(self):
+        """get the winner and make a sentence out of it
+
+        Returns:
+            str: result in printform
+        """
         return f'there are {self.square} squares with {self.btmside} by {int(self.square/self.btmside)} reqtangles in the square the size of {self.input[1] }:{ self.input[2]}.'
     def debug(self) -> None:
+        """make additional prints
+        """
+        print('\nDEBUG PRINT:', end='')
         pprint(self.input)
 
 if __name__ == '__main__':
