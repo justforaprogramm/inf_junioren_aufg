@@ -87,7 +87,7 @@ class Main:
             return 'second'
 
     @cache
-    def ording(self, index:int) -> int:
+    def ording(self, index:int = 0) -> int:
         """returns for a letter which it is in the alphabet
 
         Args:
@@ -123,7 +123,7 @@ class Data:
         with open(self.filename, 'r') as file:
             self.filecontent = file.readlines()
     
-    def store_string(self, contains:str) -> None:
+    def store_string(self, contains:str = 'ERROR_Missing_String') -> None:
         """store given string in file
 
         Args:
@@ -154,7 +154,7 @@ class Data:
         """
         return sum(1 for _ in open(self.filename, 'r'))
     
-    def give_complete_string(self, line_number:int) -> str:
+    def give_complete_string(self, line_number:int = 0) -> str:
         """give filecontent of specific line
 
         Args:
