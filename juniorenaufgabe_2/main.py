@@ -5,6 +5,7 @@ class Main:
     def __init__(self) -> None:
         """initalize step by step all functions to prepare for print
         """
+        self.used_stored = False
         self.Txt = Data()
 
         self.input = self.input()
@@ -12,7 +13,8 @@ class Main:
         if len(self.shit_str) > 1:
             print(self.shit_str)
             exit()
-        self.Txt.store_string(self.input)
+        if self.used_stored == False:
+            self.Txt.store_string(self.input)
         self.result = self.calc()
 
     def input(self) -> str:
@@ -21,17 +23,20 @@ class Main:
         Returns:
             str: a text who should be checkt
         """
-        used_input = str(input('Do u want to use a stored input?(yes or NO):'))
+        used_input = str(input('Do u want to use a stored input?(yes or NO):')).lower().strip()
 
-        if used_input.lower().strip() == 'yes' and self.Txt.call_string_number() < 1:
+        if ('yes' in used_input or 'yea' in used_input) and self.Txt.call_string_number() > 0:
+            self.used_stored = True
             print(self.Txt.call_strings())
-            use_input
-            while use_input > 0 and use_input <= self.Txt.call_string_number():
-                try:
-                    use_input = int(input(f'which given number from 0 to {self.Txt.call_string_number()} do u want to use?:'))
-                except ValueError:
-                    print('given input has to be a number')
-                    use_input = 1
+            use_input = 1
+            try:
+                use_input = int(input(f'which given number from 1 to {self.Txt.call_string_number()} do u want to use?:'))
+            except ValueError:
+                print('given input has to be a number')
+                exit()
+            if use_input < 1 or use_input > self.Txt.call_string_number():
+                print('given input has to be a number between 1 and self.Txt.call_string_number()')
+                exit()
             return self.Txt.give_complete_string(use_input)
 
         new_input = str(input('give new input(str):'))
@@ -125,7 +130,7 @@ class Data:
             contains (str): content of str
         """
         with open(self.filename, 'a') as file:
-            file.write('\n' + contains)
+            file.write(contains + '\n')
 
     def call_strings(self) -> str:
         """look up the first 5 character of each line
@@ -147,7 +152,7 @@ class Data:
         Returns:
             int: number of lines
         """
-        return sum(1 for _ in open(self.filename))
+        return sum(1 for _ in open(self.filename, 'r'))
     
     def give_complete_string(self, line_number:int) -> str:
         """give filecontent of specific line
@@ -158,7 +163,7 @@ class Data:
         Returns:
             str: content of line
         """
-        return self.filecontent[line_number]
+        return self.filecontent[(line_number-1)]
 
 if __name__ == '__main__':
     print(Main())
