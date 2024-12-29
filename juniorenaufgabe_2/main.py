@@ -1,8 +1,9 @@
 from functools import cache
+from pprint import pprint
 from string import ascii_lowercase
 
 class Main:
-    def __init__(self) -> None:
+    def __init__(self, debugmode = False) -> None:
         """initalize step by step all functions to prepare for print
         """
         self.used_stored = False
@@ -16,6 +17,9 @@ class Main:
         if self.used_stored == False:
             self.Txt.store_string(self.input)
         self.result = self.calc()
+        #addition
+        self.debug() if debugmode else ...
+        self.Txt.debug() if debugmode else ...
 
     def input(self) -> str:
         """asks which str user wants, give option to give new string
@@ -23,7 +27,8 @@ class Main:
         Returns:
             str: a text who should be checkt
         """
-        used_input = str(input('Do u want to use a stored input?(yes or NO):')).lower().strip()
+        used_input = str(input('Do u want to use a stored input?(yes or NO):'))
+        used_input = used_input.lower().strip()
 
         if ('yes' in used_input or 'yea' in used_input) and self.Txt.call_string_number() > 0:
             self.used_stored = True
@@ -87,7 +92,7 @@ class Main:
             return 'second'
 
     @cache
-    def ording(self, index:int) -> int:
+    def ording(self, index:int = 0) -> int:
         """returns for a letter which it is in the alphabet
 
         Args:
@@ -108,6 +113,12 @@ class Main:
         """
         return f'the winner is the {self.result} person.'
     
+    def debug(self) -> None:
+        """make additional prints
+        """
+        print(f'\nDEBUG PRINT: self.used_stored = \'{self.used_stored}\'; self.input = \'{self.input}\';'
+            f' self.shit_str = \'{self.shit_str}\'; self.result = \'{self.result}\';', sep = '', end='')
+    
 class Data:
     def __init__(self):
         """look if file exist in path, if not, create it
@@ -123,7 +134,7 @@ class Data:
         with open(self.filename, 'r') as file:
             self.filecontent = file.readlines()
     
-    def store_string(self, contains:str) -> None:
+    def store_string(self, contains:str = 'ERROR_Missing_String') -> None:
         """store given string in file
 
         Args:
@@ -154,7 +165,7 @@ class Data:
         """
         return sum(1 for _ in open(self.filename, 'r'))
     
-    def give_complete_string(self, line_number:int) -> str:
+    def give_complete_string(self, line_number:int = 0) -> str:
         """give filecontent of specific line
 
         Args:
@@ -164,6 +175,12 @@ class Data:
             str: content of line
         """
         return self.filecontent[(line_number-1)]
+    
+    def debug(self) -> None:
+        """make additional prints
+        """
+        print(f'\n DATA DEBUG PRINT: self.filename = \'{self.filename}\'; self.filecontent = ',end='')
+        pprint(self.filecontent)
 
 if __name__ == '__main__':
     print(Main())
