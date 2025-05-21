@@ -1,2 +1,6 @@
 # inf_junioren_aufg
-try to answer some of the questions
+TODO:
+
+10 Aufgaben der inf_junioren, die noch Human für Schüler sind.
+
+In: Java, Python, C, JS 
